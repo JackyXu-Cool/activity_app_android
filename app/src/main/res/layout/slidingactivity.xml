@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center|top"
     android:layout_weight="1">
 
@@ -13,50 +11,38 @@
         android:layout_height="wrap_content"
         android:src="@drawable/line_5"/>
 
-    <LinearLayout
+    <include layout="@layout/sliding_buttons_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:id="@+id/slidingButtons"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="档案"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:background="@android:color/transparent"
-            tools:ignore="ButtonStyle"
-            app:cornerRadius="12dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/activityTimelineButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="活动"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:backgroundTint="@color/colorPrimary"
-            app:cornerRadius="12dp"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="动态"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:cornerRadius="12dp"
-            android:background="@android:color/transparent" />
-    </LinearLayout>
-
-
-    <ImageView
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/group_162"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/slidingButtons"/>
+        android:layout_below="@+id/slidingButtons"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/group_162"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="狼人杀速度局"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:lines="1"/>
+
+
+
+    </FrameLayout>
+
 
 </RelativeLayout>
