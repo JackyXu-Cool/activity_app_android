@@ -1,10 +1,10 @@
 <resources>
-    <!-- Base application theme. -->
+    <!-- Base application theme. Override Material components -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#ffffff</item>
-        <item name="colorPrimaryDark">#ffffff</item>
-        <item name="colorAccent">#ffffff</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnSurface">#ffffff</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
     <!-- Theme without action bar -->
@@ -12,6 +12,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Material button styling -->
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="backgroundTint">@color/color_selector</item>
     </style>
 
 </resources>

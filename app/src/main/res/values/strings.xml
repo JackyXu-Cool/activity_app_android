@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Activity</string>
+    <string-array name="activity_info_buttons">
+        <item name="activity_docs">档案</item>
+        <item name="activity_highlight">活动</item>
+        <item name="activity_moments">动态</item>
+    </string-array>
 </resources>

@@ -8,31 +8,33 @@
     android:id="@+id/slidingButtons">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/activityDocsButton"
+        style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="档案"
         android:textSize="18sp"
         android:textColor="#000000"
-        android:background="@android:color/transparent"
-        app:cornerRadius="12dp"/>
+        app:cornerRadius="12dp"
+        android:onClick="changeToDocs"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/activityTimelineButton"
+        android:id="@+id/activityHighlightsButton"
+        style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="活动"
         android:textSize="18sp"
         android:textColor="#000000"
-        android:backgroundTint="@color/colorPrimary"
-        app:cornerRadius="12dp"/>
+        app:cornerRadius="12dp"
+        android:onClick="changeToHighlight"/>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/activityMomentsButton"
+        style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="动态"
         android:textColor="#000000"
         android:textSize="18sp"
         app:cornerRadius="12dp"
-        android:background="@android:color/transparent" />
+        android:onClick="changeToMoment"/>
 
 </LinearLayout>
