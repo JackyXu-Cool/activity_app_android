@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.ViewFlipper;
 
 
-public class applyActivity extends AppCompatActivity{
+public class ApplyGroupActivity extends AppCompatActivity{
 
     Button displayDocs;
     Button displayHighlights;
@@ -18,7 +18,7 @@ public class applyActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_apply_page);
+        setContentView(R.layout.group_apply_page);
 
         displayDocs = findViewById(R.id.activityDocsButton);
         displayHighlights = findViewById(R.id.activityHighlightsButton);
@@ -40,25 +40,31 @@ public class applyActivity extends AppCompatActivity{
 
     // Event listener for button that change to documentation page
     public void changeToDocs (View view) {
-        slidingContentSelector.setDisplayedChild(0);
-        displayDocs.setSelected(true);
-        displayHighlights.setSelected(false);
-        displayMoments.setSelected(false);
+        if (!displayDocs.isSelected()) {
+            slidingContentSelector.setDisplayedChild(0);
+            displayDocs.setSelected(true);
+            displayHighlights.setSelected(false);
+            displayMoments.setSelected(false);
+        }
     }
 
     // Event listener for button that change to highlight page
     public void changeToHighlight (View view) {
-        slidingContentSelector.setDisplayedChild(1);
-        displayDocs.setSelected(false);
-        displayHighlights.setSelected(true);
-        displayMoments.setSelected(false);
+        if (!displayHighlights.isSelected()) {
+            slidingContentSelector.setDisplayedChild(1);
+            displayDocs.setSelected(false);
+            displayHighlights.setSelected(true);
+            displayMoments.setSelected(false);
+        }
     }
 
     // Event listener for button that change to moment page
     public void changeToMoment (View view) {
-        slidingContentSelector.setDisplayedChild(2);
-        displayDocs.setSelected(false);
-        displayHighlights.setSelected(false);
-        displayMoments.setSelected(true);
+        if (!displayMoments.isSelected()) {
+            slidingContentSelector.setDisplayedChild(2);
+            displayDocs.setSelected(false);
+            displayHighlights.setSelected(false);
+            displayMoments.setSelected(true);
+        }
     }
 }

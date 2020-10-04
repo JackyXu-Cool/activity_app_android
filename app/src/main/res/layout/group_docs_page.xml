@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/group_introduction"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="社会主义核心价值观是文化软实力的重心。自从文化软实力的概念提出以后，世界各国纷纷加强了对本国文化软实力建设的重视，把它作为争夺发展制高点的重要手段，甚至上升到国家战略的层面。而文化软实力的竞争实质上是核心价值观的竞争。社会主义核心价值观是文化软实力的重心。自从文化软实力的概念提出以后，世界各国纷纷加强了对本国文化软实力建设的重视，把它作为争夺发展制高点的重要手段，甚至上升到国家战略的层面。而文化软实力的竞争实质上是核心价值观的竞争。"
+        />
+
+
+
+</LinearLayout>

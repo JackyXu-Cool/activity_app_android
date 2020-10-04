@@ -21,18 +21,22 @@
         android:id="@+id/slidingDisplaySelector"
         android:layout_centerInParent="true"
         android:layout_below="@+id/slidingButtons"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <include layout="@layout/activity_docs_page"
+        <include layout="@layout/group_docs_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <include layout="@layout/activity_hightlight_page"
+        <include layout="@layout/group_hightlight_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/activity_moment_page"
+        <include layout="@layout/group_moment_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

@@ -10,6 +10,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Replace "R.layout.activity_appy_page" with the xml you want to present
-        // setContentView(R.layout.activity_apply_page);
+        // setContentView(R.layout.group_apply_page);
     }
 }

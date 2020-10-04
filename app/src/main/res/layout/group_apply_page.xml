@@ -6,7 +6,7 @@
         android:id="@+id/sliding_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".applyActivity"
+        tools:context=".ApplyGroupActivity"
         android:gravity="bottom">
 
     <!-- Main Content -->
@@ -46,7 +46,7 @@
             android:layout_marginStart="20dp"
             android:orientation="vertical">
 
-            <!-- Activity Title and share icon -->>
+            <!-- Activity Title and share icon -->
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -152,7 +152,7 @@
 
         <!-- Apply and Collect buttons -->
         <include
-            layout="@layout/activitybuttons"
+            layout="@layout/group_apply_buttons"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
     </LinearLayout>
 
     <!-- Sliding part -->
-    <include layout="@layout/slidingpanel_activity"
+    <include layout="@layout/slidingpanel_group"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
