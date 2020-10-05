@@ -79,6 +79,10 @@ public class Group {
         this.momentList = momentList;
     }
 
+    public void addToMomentList(Moment moment) {
+        this.momentList.add(moment);
+    }
+
     public int getGroupSize() {
         return groupMembers.size();
     }

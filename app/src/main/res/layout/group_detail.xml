@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+        <!-- Group Title and share icon -->
+        <RelativeLayout
+            android:id="@+id/groupTitleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="夕阳红活动小组"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_alignParentStart="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/share_icon"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <!-- Activity Date -->
+        <LinearLayout
+            android:id="@+id/groupDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/clockIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/clock" />
+
+            <TextView
+                android:id="@+id/groupDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="成立时间： 2020年8月20日"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Number of group members -->
+        <LinearLayout
+            android:id="@+id/groupNumberLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/groupIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_icon" />
+
+            <TextView
+                android:id="@+id/groupNumberTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="小组人数： 7人"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Photo gallery for all group members -->
+        <LinearLayout
+            android:id="@+id/memberPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/member_image_1"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/person_1"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/member_image_2"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/person_2"
+                app:civ_border_color="#ffffff"
+                app:civ_border_width="2dp" />
+
+        </LinearLayout>
+
+        <!-- Apply and Collect buttons -->
+        <include layout="@layout/group_apply_buttons" />
+
+</LinearLayout>
