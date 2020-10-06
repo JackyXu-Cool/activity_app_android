@@ -1,12 +1,17 @@
 package activity.app.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import java.util.Date;
+
+import activity.app.android.databinding.GroupApplyPageBinding;
+import activity.app.android.model.Group;
 
 public class ApplyGroupActivity extends AppCompatActivity{
 
@@ -18,7 +23,15 @@ public class ApplyGroupActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_apply_page);
+
+        GroupApplyPageBinding mbinding = DataBindingUtil.setContentView(this, R.layout.group_apply_page);
+
+        Group group = new Group(
+                "Jacky's soccer club",
+                "Best group ever",
+                "xxx");
+
+        mbinding.setGroup(group);
 
         displayDocs = findViewById(R.id.activityDocsButton);
         displayHighlights = findViewById(R.id.activityHighlightsButton);

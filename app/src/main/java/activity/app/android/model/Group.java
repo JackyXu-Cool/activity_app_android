@@ -1,8 +1,11 @@
 package activity.app.android.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Group {
     private String groupName;
@@ -13,11 +16,11 @@ public class Group {
     private List<Activity> activityList;
     private List<Moment> momentList;
 
-    public Group (String groupName, String groupIntroduction, String coverURL, Date createdDate) {
+    public Group (String groupName, String groupIntroduction, String coverURL) {
         this.groupName = groupName;
         this.groupIntroduction = groupIntroduction;
         this.coverURL = coverURL;
-        this.createdDate = createdDate;
+        this.createdDate = new Date();
         groupMembers = new ArrayList<>();
         activityList = new ArrayList<>();
         momentList = new ArrayList<>();
@@ -47,8 +50,9 @@ public class Group {
         this.coverURL = coverURL;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getCreatedDate() {
+        DateFormat df = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        return "成立时间：" + df.format(createdDate);
     }
 
     public void setCreatedDate(Date createdDate) {
@@ -85,6 +89,10 @@ public class Group {
 
     public int getGroupSize() {
         return groupMembers.size();
+    }
+
+    public String getGroupSizeString() {
+        return "小组人数： " + getGroupSize() + "人";
     }
 
     // TODO: Extra group methods necessary?
