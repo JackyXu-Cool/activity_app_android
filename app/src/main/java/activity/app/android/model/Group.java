@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import activity.app.android.R;
+
 public class Group {
     private String groupName;
     private String groupIntroduction;

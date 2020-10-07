@@ -37,8 +37,7 @@
                 android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
-                android:layout_weight="2"
-                android:src="@drawable/dummy_background_astronmy" />
+                android:layout_weight="2" />
 
             <!-- Group information -->
             <include layout="@layout/group_detail"

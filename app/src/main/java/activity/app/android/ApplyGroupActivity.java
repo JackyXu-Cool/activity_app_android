@@ -6,9 +6,14 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
-import java.util.Date;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+
+import java.net.URL;
 
 import activity.app.android.databinding.GroupApplyPageBinding;
 import activity.app.android.model.Group;
@@ -28,8 +33,8 @@ public class ApplyGroupActivity extends AppCompatActivity{
 
         Group group = new Group(
                 "Jacky's soccer club",
-                "Best group ever",
-                "xxx");
+                "One of the best soccer team in FIFA20 FUT.",
+                "https://www.adorama.com/alc/wp-content/uploads/2017/11/shutterstock_114802408-1024x683.jpg");
 
         mbinding.setGroup(group);
 
@@ -37,6 +42,10 @@ public class ApplyGroupActivity extends AppCompatActivity{
         displayHighlights = findViewById(R.id.activityHighlightsButton);
         displayMoments = findViewById(R.id.activityMomentsButton);
         slidingContentSelector = findViewById(R.id.slidingDisplaySelector);
+
+        ImageView avatar = findViewById(R.id.avatar);
+
+        Glide.with(ApplyGroupActivity.this).load(group.getCoverURL()).into(avatar);
 
         sliding_buttongroups_setup();
         slidingContentSelector.setDisplayedChild(1);
