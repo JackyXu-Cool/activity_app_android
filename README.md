@@ -1,15 +1,14 @@
 # activity_app_android
 
-测试我的page：
-1. 将AndroidManifest.xml中的这个改为 “.applyActivity" 就可以了
-<img src="https://xujunqi.net/screenshot_activity.png" width="600" />
+### 测试页面效果 （java resource file的逻辑）
 
-现在暂时长这样： <br />
-<img src="https://xujunqi.net/temp_apply.png" width="150" />
-<img src="https://xujunqi.net/temp_apply_slide.png" width="150" />
+因为我们现在创建的都不是一进去的那个主页面，所以尽量不在MainActivity来写。页面切换啥的我们过阵子再来解决。
+我创建了的叫ApplyGroupActivity，主要handle我那个页面，你也可以按照你的页面的功能，创建xxxxxActivity
 
 <br />
 
-加入你的page的话就只用这两步：
-1. 在MainActivity setContentView(<Name-of-your-layout-xml-file>) eg. R.layout.activity_apply_page
-2. 记得再把AndroidManifest.xml改回".MainActivity"
+需要注意的就是你需要在AndroidManifest.xml里的activity tag把name从我现在的".ApplyGroupActivity"改成你对应的activity java file
+这样模拟器才present你的页面
+
+### Layout 文件夹
+我在layout里面创建了不少可以重复利用的layout，比如tool_bar等等，要是符合你页面需求的话可以直接用<include layout="..."/> 拿去用，
