@@ -25,15 +25,13 @@
             android:gravity="center">
 
             <!-- Top navigation bar element-->
-            <include
-                layout="@layout/navigation" />
+            <include layout="@layout/tool_bar"/>
 
             <!-- Activity Image-->
             <ImageView
                 android:id="@+id/avatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"

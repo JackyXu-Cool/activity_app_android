@@ -2,9 +2,9 @@
     <!-- Base application theme. Override Material components -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorOnSurface">#ffffff</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">#ffffff</item>
+        <item name="colorOnSurface">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#bfbfbf</item>
     </style>
 
     <!-- Theme without action bar -->
