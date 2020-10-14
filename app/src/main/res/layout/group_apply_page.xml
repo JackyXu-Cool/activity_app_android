@@ -27,6 +27,8 @@
             <!-- Top navigation bar element-->
             <include layout="@layout/tool_bar"/>
 
+            <include layout="@layout/progressbar_layout"/>
+
             <!-- Activity Image-->
             <ImageView
                 android:id="@+id/avatar"
