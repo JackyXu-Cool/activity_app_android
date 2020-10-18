@@ -1,5 +1,6 @@
 package activity.app.android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -8,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,7 +26,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
-import activity.app.android.databinding.GroupApplyPageBinding;
+import activity.app.android.databinding.ActivityApplyGroupBinding;
 import activity.app.android.model.Group;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
@@ -48,7 +50,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
     ViewFlipper slidingContentSelector;
     LinearLayout progressView;
     LinearLayout groupContent;
-    GroupApplyPageBinding mbinding;
+    ActivityApplyGroupBinding mbinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,12 @@ public class ApplyGroupActivity extends AppCompatActivity{
         Bmob.initialize(this, key1);
 
         // Apply data binding
-        mbinding = DataBindingUtil.setContentView(this, R.layout.group_apply_page);
+        mbinding = DataBindingUtil.setContentView(this, R.layout.activity_apply_group);
 
         groupContent = findViewById(R.id.group);
         progressView = findViewById(R.id.progressbar_view);
 
-        // Set up toolbars
+//        // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -162,6 +164,17 @@ public class ApplyGroupActivity extends AppCompatActivity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     // Basic set up for the button groups on the top of the sliding panel
