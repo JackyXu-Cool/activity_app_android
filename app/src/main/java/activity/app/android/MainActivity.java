@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.MapView;
@@ -14,11 +16,18 @@ public class MainActivity extends AppCompatActivity {
 
     MapView mMapView = null;
     AMap aMap;
+    LinearLayout slidingButtons;
+    Button displayRecrutingInfo;
+    Button displayActivityInfo;
+    Button displayHighlights;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        slidingButtons = findViewById(R.id.slidingButtons);
+
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -26,8 +35,18 @@ public class MainActivity extends AppCompatActivity {
         if (aMap == null) {
             aMap = mMapView.getMap();
         }
+
+        // Instantiate the buttons on sliding panel
+        displayRecrutingInfo = (Button)(slidingButtons.getChildAt(0));
+        displayActivityInfo = (Button)(slidingButtons.getChildAt(1));
+        displayHighlights = (Button)(slidingButtons.getChildAt(2));
+        sliding_buttongroups_setup();
     }
 
+    /**
+     * Handle the event that start another activity
+     * @param view start button
+     */
     public void changeToApplyPage(View view) {
         Intent intent = new Intent(this, ApplyGroupActivity.class);
         startActivity(intent);
@@ -56,5 +75,13 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
         mMapView.onSaveInstanceState(outState);
+    }
+
+    // Basic set up for the button groups on the top of the sliding panel
+    private void sliding_buttongroups_setup() {
+        String[] buttonNames = getResources().getStringArray(R.array.main_page_buttons);
+        displayRecrutingInfo.setText(buttonNames[0]);
+        displayActivityInfo.setText(buttonNames[1]);
+        displayHighlights.setText(buttonNames[2]);
     }
 }

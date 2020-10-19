@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Activity</string>
-    <string-array name="activity_info_buttons">
-        <item name="activity_docs">档案</item>
-        <item name="activity_highlight">活动</item>
-        <item name="activity_moments">动态</item>
+    <string-array name="group_info_buttons">
+        <item name="group_docs">档案</item>
+        <item name="group_highlight">活动</item>
+        <item name="group_moments">动态</item>
     </string-array>
     <string name="group_introduction">小组介绍</string>
+    <string-array name="main_page_buttons">
+        <item name="recruit">招募</item>
+        <item name="activity">活动</item>
+        <item name="highlight">亮点</item>
+    </string-array>
 </resources>

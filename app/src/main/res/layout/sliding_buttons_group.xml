@@ -8,33 +8,36 @@
     android:id="@+id/slidingButtons">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/activityDocsButton"
         style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:textSize="14sp"
         android:textColor="#000000"
-        app:cornerRadius="12dp"
-        android:onClick="changeToDocs"/>
+        app:cornerRadius="12dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/activityHighlightsButton"
         style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:textSize="14sp"
         android:textColor="#000000"
-        app:cornerRadius="12dp"
-        android:onClick="changeToHighlight"/>
+        app:cornerRadius="12dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/activityMomentsButton"
         style="@style/MaterialButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
         android:textColor="#000000"
-        android:textSize="18sp"
-        app:cornerRadius="12dp"
-        android:onClick="changeToMoment"/>
+        android:textSize="14sp"
+        app:cornerRadius="12dp" />
 
 </LinearLayout>

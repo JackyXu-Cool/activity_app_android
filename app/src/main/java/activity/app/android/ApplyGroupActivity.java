@@ -50,6 +50,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
     ViewFlipper slidingContentSelector;
     LinearLayout progressView;
     LinearLayout groupContent;
+    LinearLayout slidingButtons;
     ActivityApplyGroupBinding mbinding;
 
     @Override
@@ -64,6 +65,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
 
         groupContent = findViewById(R.id.group);
         progressView = findViewById(R.id.progressbar_view);
+        slidingButtons = findViewById(R.id.slidingButtons);
 
 //        // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -73,11 +75,47 @@ public class ApplyGroupActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Instantiate the buttons on sliding panel
-        displayDocs = findViewById(R.id.activityDocsButton);
-        displayHighlights = findViewById(R.id.activityHighlightsButton);
-        displayMoments = findViewById(R.id.activityMomentsButton);
+        displayDocs = (Button)(slidingButtons.getChildAt(0));
+        displayHighlights = (Button)(slidingButtons.getChildAt(1));
+        displayMoments = (Button)(slidingButtons.getChildAt(2));
         slidingContentSelector = findViewById(R.id.slidingDisplaySelector);
         avatar = findViewById(R.id.avatar);
+
+        displayDocs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!displayDocs.isSelected()) {
+                    slidingContentSelector.setDisplayedChild(0);
+                    displayDocs.setSelected(true);
+                    displayHighlights.setSelected(false);
+                    displayMoments.setSelected(false);
+                }
+            }
+        });
+
+        displayHighlights.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (!displayHighlights.isSelected()) {
+                    slidingContentSelector.setDisplayedChild(1);
+                    displayDocs.setSelected(false);
+                    displayHighlights.setSelected(true);
+                    displayMoments.setSelected(false);
+                }
+            }
+        });
+
+        displayMoments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!displayMoments.isSelected()) {
+                    slidingContentSelector.setDisplayedChild(2);
+                    displayDocs.setSelected(false);
+                    displayHighlights.setSelected(false);
+                    displayMoments.setSelected(true);
+                }
+            }
+        });
 
         // Set up sliding button groups functionality
         sliding_buttongroups_setup();
@@ -166,6 +204,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
         return true;
     }
 
+    // Handle event for "cancel" button: return to the previous page
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -179,40 +218,10 @@ public class ApplyGroupActivity extends AppCompatActivity{
 
     // Basic set up for the button groups on the top of the sliding panel
     private void sliding_buttongroups_setup() {
-        String[] buttonNames = getResources().getStringArray(R.array.activity_info_buttons);
+        String[] buttonNames = getResources().getStringArray(R.array.group_info_buttons);
         displayDocs.setText(buttonNames[0]);
         displayHighlights.setText(buttonNames[1]);
         displayHighlights.setSelected(true);
         displayMoments.setText(buttonNames[2]);
-    }
-
-    // Event listener for button that change to documentation page
-    public void changeToDocs (View view) {
-        if (!displayDocs.isSelected()) {
-            slidingContentSelector.setDisplayedChild(0);
-            displayDocs.setSelected(true);
-            displayHighlights.setSelected(false);
-            displayMoments.setSelected(false);
-        }
-    }
-
-    // Event listener for button that change to highlight page
-    public void changeToHighlight (View view) {
-        if (!displayHighlights.isSelected()) {
-            slidingContentSelector.setDisplayedChild(1);
-            displayDocs.setSelected(false);
-            displayHighlights.setSelected(true);
-            displayMoments.setSelected(false);
-        }
-    }
-
-    // Event listener for button that change to moment page
-    public void changeToMoment (View view) {
-        if (!displayMoments.isSelected()) {
-            slidingContentSelector.setDisplayedChild(2);
-            displayDocs.setSelected(false);
-            displayHighlights.setSelected(false);
-            displayMoments.setSelected(true);
-        }
     }
 }

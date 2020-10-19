@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/sliding_main_page"
+        app:umanoOverlay="true"
         android:gravity="bottom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,13 +27,26 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#EAEAEA">
 
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line_5"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/sliding_buttons_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"/>
+
+            <include layout="@layout/main_page_buttons" />
+
+        </RelativeLayout>
 
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
