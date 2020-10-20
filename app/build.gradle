@@ -68,4 +68,7 @@ dependencies {
     implementation 'com.amap.api:map2d:latest.integration'
     implementation 'com.amap.api:search:latest.integration'
     implementation 'com.amap.api:location:latest.integration'
+
+    // Sliding panel
+    implementation 'com.github.woxingxiao:SlidingUpPanelLayout:1.1.2'
 }
