@@ -3,11 +3,14 @@ package activity.app.android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.MapView;
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     SlidingUpPanelLayout panel;
     LinearLayout slidingButtons;
     LinearLayout mainPageButtons;
+    LinearLayout activityGallery;
     Button displayRecrutingInfo;
     Button displayActivityInfo;
     Button displayHighlights;
@@ -32,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         slidingButtons = findViewById(R.id.slidingButtons);
-        mainPageButtons = findViewById(R.id.main_page_buttons);
+        mainPageButtons = (LinearLayout)(findViewById(R.id.main_page_buttons));
+        activityGallery = findViewById(R.id.activityGallery);
         panel = findViewById(R.id.sliding_main_page);
 
         //获取地图控件引用
@@ -48,6 +53,23 @@ public class MainActivity extends AppCompatActivity {
         displayActivityInfo = (Button)(slidingButtons.getChildAt(1));
         displayHighlights = (Button)(slidingButtons.getChildAt(2));
         sliding_buttongroups_setup();
+
+        panel.addPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+            }
+
+            @Override
+            public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
+                if (newState.name().equals("EXPANDED") ||
+                        newState.name().equals("DRAGGING") && previousState.name().equals("COLLAPSED")) {
+                    mainPageButtons.setVisibility(View.INVISIBLE);
+                } else {
+                    mainPageButtons.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -78,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        int[] location = new int[2];
-        mainPageButtons.getLocationOnScreen(location);
-        panel.setPanelHeight(this.getResources().getDisplayMetrics().heightPixels - location[1] + mainPageButtons.getHeight() + 30);
+        ImageView line = findViewById(R.id.sliding_line);
+        panel.setPanelHeight(5 + line.getHeight() + 10 + activityGallery.getHeight() + 5 + slidingButtons.getHeight() + 20
+                + mainPageButtons.getHeight() + 30);
     }
 
     // Basic set up for the button groups on the top of the sliding panel

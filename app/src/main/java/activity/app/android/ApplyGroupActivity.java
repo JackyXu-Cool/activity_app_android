@@ -19,6 +19,7 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,6 +53,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
     LinearLayout groupContent;
     LinearLayout slidingButtons;
     ActivityApplyGroupBinding mbinding;
+    SlidingUpPanelLayout panel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,13 @@ public class ApplyGroupActivity extends AppCompatActivity{
         // Apply data binding
         mbinding = DataBindingUtil.setContentView(this, R.layout.activity_apply_group);
 
+        // Define view elements
         groupContent = findViewById(R.id.group);
         progressView = findViewById(R.id.progressbar_view);
         slidingButtons = findViewById(R.id.slidingButtons);
+        panel = findViewById(R.id.slidingpanel_group_whole);
 
-//        // Set up toolbars
+        // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -124,6 +128,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
         new Task().execute();
     }
 
+    // Fetch data from Bmob database and then apply those data to views on this page
     class Task extends AsyncTask<String, Integer, Boolean> {
         @Override
         protected void onPreExecute() {
@@ -169,7 +174,9 @@ public class ApplyGroupActivity extends AppCompatActivity{
         protected Boolean doInBackground(String... params) {
             while (avatar.getDrawable() == null) {
                 try {
+                    panel.setTouchEnabled(false);
                     Thread.sleep(1000);
+                    panel.setTouchEnabled(true);
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
