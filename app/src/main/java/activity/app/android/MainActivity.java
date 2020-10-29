@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: Get location of the user and display the map in that area
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -1,6 +1,8 @@
 package activity.app.android.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cn.bmob.v3.BmobObject;
 
@@ -10,10 +12,8 @@ public class Group extends BmobObject {
     private String coverURL;  // Cover photo for this group
     private Date createdDate;
 
-    //TODO: learn how to connect different data object in Bmob
-//    private List<Person> groupMembers;
-//    private List<Activity> activityList;
-//    private List<Moment> momentList;
+    private List<String> groupMembers; // String stores the user id
+    private List<String> activityList; // String stores the activity id
 
     public Group() {}
 
@@ -61,5 +61,21 @@ public class Group extends BmobObject {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public List<String> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<String> groupMembers) {
+        this.groupMembers = new ArrayList<>(groupMembers);
+    }
+
+    public List<String> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<String> activityList) {
+        this.activityList = new ArrayList<>(activityList);
     }
 }

@@ -2,12 +2,12 @@ package activity.app.android.model;
 
 public class Moment {
     private int likes;
-    private Person creator;
+    private String creatorID;
     private String content;
 
-    public Moment(Person creator, String content) {
+    public Moment(String creatorID, String content) {
         this.likes = 0;
-        this.creator = creator;
+        this.creatorID = creatorID;
         this.content = content;
     }
 
