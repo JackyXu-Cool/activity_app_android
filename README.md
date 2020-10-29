@@ -12,3 +12,6 @@
 
 ### Layout 文件夹
 我在layout里面创建了不少可以重复利用的layout，比如tool_bar等等，要是符合你页面需求的话可以直接用<include layout="..."/> 拿去用，
+
+### Progress
+[10/20号进度](https://youtu.be/N_9_RSDaFBs)
