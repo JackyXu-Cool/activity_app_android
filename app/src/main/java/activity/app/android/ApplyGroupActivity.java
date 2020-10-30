@@ -140,7 +140,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
             // TODO: How will groupid be passed in??
             try {
                 BmobQuery<Group> bmobQuery = new BmobQuery<Group>();
-                bmobQuery.getObject("587c3f1af4", new QueryListener<Group>() {
+                bmobQuery.getObject(getIntent().getStringExtra("Group_ID"), new QueryListener<Group>() {
                     @Override
                     public void done(Group group,BmobException e) {
                         if(e==null){
@@ -158,7 +158,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
                 });
 
             } catch(Exception e) {
-                // TODO: Reject to render anything and retain in the last page
+                finish(); // Return to the previous page is group not found
             }
             super.onPreExecute();
         }

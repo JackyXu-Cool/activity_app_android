@@ -6,14 +6,14 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_below="@+id/slidingButtons"
+    android:background="#EAEAEA"
     app:layout_constraintBottom_toBottomOf="parent">
 
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/map"/>
@@ -21,6 +21,8 @@
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/community" />
@@ -28,22 +30,28 @@
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:id="@+id/startButton"
-        android:onClick="changeToApplyPage"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/start_buttom" />
 
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
+        android:onClick="changeToGroupListPage"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/team" />
 
     <ImageButton
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/profile" />
