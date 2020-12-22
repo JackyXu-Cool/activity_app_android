@@ -136,8 +136,6 @@ public class ApplyGroupActivity extends AppCompatActivity{
             groupContent.setVisibility(View.GONE);
             avatar.setVisibility(View.GONE);
 
-            // Fetch group from database and then do basic setup
-            // TODO: How will groupid be passed in??
             try {
                 BmobQuery<Group> bmobQuery = new BmobQuery<Group>();
                 bmobQuery.getObject(getIntent().getStringExtra("Group_ID"), new QueryListener<Group>() {
