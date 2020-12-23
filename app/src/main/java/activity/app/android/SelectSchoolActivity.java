@@ -32,7 +32,7 @@ public class SelectSchoolActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adpterView, View view, int position, long id) {
                 for (int i = 0; i < listView.getChildCount(); i++) {
                     if(position == i ){
-                        listView.getChildAt(i).setBackgroundColor(Color.BLACK);
+                        listView.getChildAt(i).setBackgroundColor(Color.rgb(117, 115, 115));
                     }else{
                         listView.getChildAt(i).setBackgroundColor(Color.rgb(127, 180, 252));
                     }
@@ -43,13 +43,16 @@ public class SelectSchoolActivity extends AppCompatActivity {
 
     /**
      * Handle the event that start another activity
-     * @param view start button
+     * @param view "Get started" textview
      */
     public void changeToGroupListPage(View view) {
         for (int i = 0; i < listView.getChildCount(); i++) {
             if (listView.isItemChecked(i)) {
-                Intent intent = new Intent(this, ApplyGroupActivity.class);
-                intent.putExtra("Group_ID", "587c3f1af4");
+                listView.setItemChecked(i, false);
+                Intent intent = new Intent(this, GroupListActivity.class);
+                String name = (String) (listView.getItemAtPosition(i));
+                intent.putExtra("school_name", name);
+//                intent.putExtra("Group_ID", "587c3f1af4");
                 startActivity(intent);
                 return;
             }

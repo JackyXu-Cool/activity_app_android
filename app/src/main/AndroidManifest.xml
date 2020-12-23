@@ -23,7 +23,7 @@
             android:name="com.amap.api.v2.apikey"
             android:value="991960c5c6f3b660c81b1aa8c581077c" />
 
-        <activity android:name=".WelcomActivity" >
+        <activity android:name=".WelcomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +32,9 @@
         </activity>
 
         <activity android:name=".SelectSchoolActivity">
+        </activity>
+
+        <activity android:name=".GroupListActivity">
         </activity>
 
         <activity android:name=".ApplyGroupActivity" >
