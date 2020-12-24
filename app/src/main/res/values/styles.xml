@@ -19,4 +19,11 @@
         <item name="backgroundTint">@color/color_selector</item>
     </style>
 
+    <!-- EditText theme -->
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#5e5e5c</item>
+        <item name="colorControlActivated">#5e5e5c</item>
+        <item name="colorControlHighlight">#5e5e5c</item>
+    </style>
+
 </resources>

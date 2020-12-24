@@ -21,16 +21,35 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="20dp"/>
 
-    <com.google.android.material.button.MaterialButton
-        app:strokeColor="#fff"
-        app:strokeWidth="1dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:id="@+id/usernameTxt"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:inputType="text"
         android:textSize="20sp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Register" />
+        android:hint="Username"
+        android:textColorHint="#fff"
+        android:fontFamily="@font/nexa_light"
+        android:theme="@style/EditTextTheme"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordTxt"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:inputType="textPassword"
+        android:textSize="20sp"
+        android:hint="Password"
+        android:textColorHint="#fff"
+        android:theme="@style/EditTextTheme"
+        android:fontFamily="@font/nexa_light"
+        android:layout_gravity="center_horizontal"/>
 
     <com.google.android.material.button.MaterialButton
         app:strokeColor="#fff"
@@ -38,10 +57,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:textSize="20sp"
+        android:onClick="loginOperation"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Login" />
+        android:text="Login &amp; Register" />
 
     <TextView
         android:layout_marginTop="30sp"
@@ -51,7 +71,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="changeToSelectPage"
-        android:text="Get Started"/>
-
+        android:text="Get started as guest"/>
 
 </LinearLayout>
