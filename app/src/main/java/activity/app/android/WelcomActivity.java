@@ -26,6 +26,11 @@ public class WelcomActivity  extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void switchToRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
     public void loginOperation(View view) {
         if (username.getText().toString().trim().equals("") || password.getText().toString().trim().equals("")) {
             Toast.makeText(this, "Enter the required field", Toast.LENGTH_SHORT).show();

@@ -17,6 +17,7 @@ public class Group extends BmobObject {
 
     public Group() {}
 
+    // TODO: CoverURL should be replaced by file (image file...??)
     public Group (String groupName, String groupIntroduction, String coverURL) {
         this.groupName = groupName;
         this.groupIntroduction = groupIntroduction;

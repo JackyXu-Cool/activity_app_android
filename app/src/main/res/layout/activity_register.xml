@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomActivity">
-    
+    tools:context=".RegisterActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:fontFamily="@font/nexa_bold"
         android:textColor="#fff"
-        android:text="ClubM, Your club management friend"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="20dp"/>
-    
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Register" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/user_avatar_preview"
+        android:src="@drawable/placeholder_image"
+        android:layout_gravity="center_horizontal"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:background="#cfe3ff"
+        android:text="Select Image"
+        android:onClick="selectFromGallery"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/usernameTxt"
+        android:id="@+id/usernameTxt_register"
         android:layout_marginTop="25dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
@@ -38,7 +59,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordTxt"
+        android:id="@+id/passwordTxt_register"
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
@@ -58,9 +79,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:textSize="20sp"
-        android:onClick="loginOperation"
+        android:onClick="registerOperation"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Login" />
+        android:text="Register" />
 
     <com.google.android.material.button.MaterialButton
         app:strokeColor="#fff"
@@ -70,18 +91,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
-        android:onClick="switchToRegister"
+        android:onClick="switchToLogin"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Switch to Register" />
-
-    <TextView
-        android:layout_marginTop="30sp"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="changeToSelectPage"
-        android:text="Get started as guest"/>
+        android:text="Switch to Login" />
 
 </LinearLayout>
