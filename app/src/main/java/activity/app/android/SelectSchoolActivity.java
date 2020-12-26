@@ -52,7 +52,6 @@ public class SelectSchoolActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, GroupListActivity.class);
                 String name = (String) (listView.getItemAtPosition(i));
                 intent.putExtra("school_name", name);
-//                intent.putExtra("Group_ID", "587c3f1af4");
                 startActivity(intent);
                 return;
             }

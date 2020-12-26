@@ -3,19 +3,20 @@ package activity.app.android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.entity.LocalMedia;
+import java.io.IOException;
 
-import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    int SELECT_PHOTO = 1;
+    Uri uri;
     ImageView preview;
 
     @Override
@@ -37,22 +38,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     // TODO: fix image picker.
     public void selectFromGallery(View view) {
-        PictureSelector.create(this)
-                .openGallery(PictureMimeType.ofImage())
-                .forResult(PictureConfig.CHOOSE_REQUEST);
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, SELECT_PHOTO);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case PictureConfig.CHOOSE_REQUEST:
-                    // 结果回调
-                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    break;
-                default:
-                    break;
+        if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            uri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                preview.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

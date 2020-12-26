@@ -1,11 +1,15 @@
 package activity.app.android;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class GroupListActivity extends AppCompatActivity {
@@ -34,5 +38,23 @@ public class GroupListActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    // Handle event for "cancel" button: return to the previous page
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void changeToGroupPage(View view) {
+        Intent intent = new Intent(this, ApplyGroupActivity.class);
+        intent.putExtra("Group_ID", "587c3f1af4");
+        startActivity(intent);
     }
 }
