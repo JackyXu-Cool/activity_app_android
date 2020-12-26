@@ -25,4 +25,4 @@
 
 ### Progress
 [10/20号进度](https://youtu.be/N_9_RSDaFBs) <br />
-[12/26号进度](https://youtu.be/nZPPBnYPpX8) [latest]
+[12/26号进度](https://www.youtube.com/watch?v=ZF-lh1_uuSY) [latest]
