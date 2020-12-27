@@ -36,10 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // TODO: fix image picker.
     public void selectFromGallery(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
+        // startActivityForResult() defines that when this activity exits, onActivityResult() will be called
         startActivityForResult(intent, SELECT_PHOTO);
     }
 
