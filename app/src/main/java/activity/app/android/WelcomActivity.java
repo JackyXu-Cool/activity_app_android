@@ -38,7 +38,7 @@ public class WelcomActivity  extends AppCompatActivity {
             String usernameTxt = username.getText().toString().trim();
             String passwordTxt = password.getText().toString().trim();
 
-            // TODO: Encrypt the password and store the user information into the bmob database
+            // TODO: fetch User from database based on username and compare the password
 
         }
     }

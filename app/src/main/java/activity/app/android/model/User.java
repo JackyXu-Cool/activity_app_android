@@ -5,27 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 
 public class User extends BmobUser {
-    private String nickName; // account name
-    private String avatarURL;
-    private List<String> affliatedGroup; //String stores the group id
-
-    public String getNickname() { return nickName; }
-
-    public User setNickName(String nickName) {
-        this.nickName = nickName;
-        return this;
-    }
-
-    public String getAvatarURL() {
-        return avatarURL;
-    }
-
-    public User setAvatarURL(String avatarURL) {
-        this.avatarURL = avatarURL;
-        return this;
-    }
+    private List<String> affliatedGroup; // Stores a list of group id
+    private List<String> attendedActivity; // Stores a list of activity id
+    private BmobFile avatar;
 
     public List<String> getAffliatedGroup() {
         return affliatedGroup;
@@ -33,6 +18,24 @@ public class User extends BmobUser {
 
     public User setAffliatedGroup(List<String> affliatedGroup) {
         this.affliatedGroup = new ArrayList<>(affliatedGroup);
+        return this;
+    }
+
+    public List<String> getAttendedActivity() {
+        return attendedActivity;
+    }
+
+    public User setAttendedActivity(List<String> attendedActivity) {
+        this.attendedActivity = new ArrayList<>(attendedActivity);
+        return this;
+    }
+
+    public BmobFile getAvatar() {
+        return avatar;
+    }
+
+    public User setAvatar(BmobFile avatar) {
+        this.avatar = avatar;
         return this;
     }
 }

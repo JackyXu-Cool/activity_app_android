@@ -2,8 +2,10 @@ package activity.app.android.util;
 
 import activity.app.android.model.User;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 public class BmobObjectOperation {
     public static void saveToDatabase(BmobObject object) {
@@ -18,7 +20,7 @@ public class BmobObjectOperation {
             }
         });
     }
-    public static void signUp(User user) {
+    public static void signUp(User user){
         user.signUp(new SaveListener<User>() {
             @Override
             public void done(User user, BmobException e) {
