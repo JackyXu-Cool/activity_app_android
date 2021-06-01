@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cn.bmob.v3.BmobObject;
-
-public class Group extends BmobObject {
+// TODO: create realm model
+public class Group {
     private String groupName;
     private String groupIntroduction;
     private String coverURL;  // Cover photo for this group

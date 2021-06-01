@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 29
@@ -63,4 +64,8 @@ dependencies {
     implementation 'com.squareup.okio:okio:2.2.2'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation "org.reactivestreams:reactive-streams:1.0.2"
+}
+
+realm {
+    syncEnabled = true
 }

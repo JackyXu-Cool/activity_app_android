@@ -29,10 +29,6 @@ import java.util.NoSuchElementException;
 
 import activity.app.android.databinding.ActivityApplyGroupBinding;
 import activity.app.android.model.Group;
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.QueryListener;
 
 public class ApplyGroupActivity extends AppCompatActivity{
 
@@ -59,8 +55,6 @@ public class ApplyGroupActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set up Bmob
-        Bmob.initialize(this, key1);
 
         // Apply data binding
         mbinding = DataBindingUtil.setContentView(this, R.layout.activity_apply_group);
@@ -136,28 +130,28 @@ public class ApplyGroupActivity extends AppCompatActivity{
             groupContent.setVisibility(View.GONE);
             avatar.setVisibility(View.GONE);
 
-            try {
-                BmobQuery<Group> bmobQuery = new BmobQuery<Group>();
-                bmobQuery.getObject(getIntent().getStringExtra("Group_ID"), new QueryListener<Group>() {
-                    @Override
-                    public void done(Group group,BmobException e) {
-                        if(e==null){
-                            mbinding.setGroup(group);
-
-                            // Set Image view, group introduction, and created date
-                            setGroupCover(group.getCoverURL());
-                            setGroupIntro(group.getGroupIntroduction());
-                            setGroupCreatedDate(group.getCreatedDate());
-
-                        }else{
-                            throw new NoSuchElementException("Cannot find group");
-                        }
-                    }
-                });
-
-            } catch(Exception e) {
-                finish(); // Return to the previous page is group not found
-            }
+//            try {
+//                BmobQuery<Group> bmobQuery = new BmobQuery<Group>();
+//                bmobQuery.getObject(getIntent().getStringExtra("Group_ID"), new QueryListener<Group>() {
+//                    @Override
+//                    public void done(Group group,BmobException e) {
+//                        if(e==null){
+//                            mbinding.setGroup(group);
+//
+//                            // Set Image view, group introduction, and created date
+//                            setGroupCover(group.getCoverURL());
+//                            setGroupIntro(group.getGroupIntroduction());
+//                            setGroupCreatedDate(group.getCreatedDate());
+//
+//                        }else{
+//                            throw new NoSuchElementException("Cannot find group");
+//                        }
+//                    }
+//                });
+//
+//            } catch(Exception e) {
+//                finish(); // Return to the previous page is group not found
+//            }
             super.onPreExecute();
         }
 

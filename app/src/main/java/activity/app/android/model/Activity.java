@@ -2,9 +2,8 @@ package activity.app.android.model;
 
 import java.util.Date;
 
-import cn.bmob.v3.BmobObject;
-
-public class Activity extends BmobObject {
+// TODO: create realm model
+public class Activity{
     private String name;
     private String imageURL;
     private String location;
