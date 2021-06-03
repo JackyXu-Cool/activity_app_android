@@ -2,8 +2,10 @@ package activity.app.android.model;
 
 import java.util.Date;
 
+import io.realm.RealmObject;
+
 // TODO: create realm model
-public class Activity{
+public class Activity extends RealmObject {
     private String name;
     private String imageURL;
     private String location;

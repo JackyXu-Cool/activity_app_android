@@ -1,5 +1,6 @@
 package activity.app.android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,9 +14,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import org.bson.Document;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import activity.app.android.util.AESCrypt;
 import activity.app.android.util.PathConverter;
@@ -36,7 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
     EditText passwordTxt;
     EditText usernameTxt;
 
+    Bitmap avatar;
+
     App app;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
         app = ((MyApplication) this.getApplication()).app;
     }
 
-    // TODO: Connect avatar file path with user
     // TODO: Connect activity list and affiliated groups to user
     public void registerOperation(View view) {
         if (emailTxt.getText().toString().trim().equals("") || passwordTxt.getText().toString().trim().equals("") || uri == null) {
@@ -67,15 +83,51 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter the password in correct format", Toast.LENGTH_SHORT).show();
         }
 
-        // path of the avatar and username
-        String path = PathConverter.convertMediaUriToPath(this, uri);
+        // Get username
         String username = usernameTxt.getText().toString();
 
         // register in the realm database
         app.getEmailPassword().registerUserAsync(email, hashedPassword, it->{
             if (it.isSuccess()) {
-                // Log in the newly created user and open user profile page
-                loginNewUser(path, username);
+                // Upload the image to firebase storage
+                StorageReference storageRef = storage.getReference();
+                StorageReference avatarRef = storageRef.child(app.currentUser().getId() + ".jpg");
+                String path = PathConverter.convertMediaUriToPath(this, uri);
+                try {
+                    InputStream stream = new FileInputStream(new File(path));
+                    UploadTask uploadTask = avatarRef.putStream(stream);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            Log.e("ERROR", "Fail to upload to firebase");
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                           uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                                @Override
+                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                    if (!task.isSuccessful()) {
+                                        throw task.getException();
+                                    }
+                                    return avatarRef.getDownloadUrl();
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Uri downloadUri = task.getResult();
+                                        loginNewUser(downloadUri.toString(), username);
+                                    } else {
+                                        Log.e("ERROR", "fail to get url");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } catch(FileNotFoundException e) {
+                    Log.e("ERROR", e.getMessage());
+                }
             } else {
                 Toast.makeText(this, it.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
             }
@@ -132,8 +184,8 @@ public class RegisterActivity extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             uri = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                preview.setImageBitmap(bitmap);
+                avatar = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                preview.setImageBitmap(avatar);
             } catch (IOException e) {
                 e.printStackTrace();
             }

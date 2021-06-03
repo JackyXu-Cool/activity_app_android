@@ -29,6 +29,7 @@
                 android:layout_height="96dp"
                 android:id="@+id/user_avatar_on_profile"
                 app:civ_border_color="#FFFFFF"
+                android:src="@drawable/avatar_anonymous"
                 app:civ_border_width="2dp" />
 
             <TextView

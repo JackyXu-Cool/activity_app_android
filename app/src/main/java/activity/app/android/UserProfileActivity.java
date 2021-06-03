@@ -1,24 +1,27 @@
 package activity.app.android;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import org.bson.Document;
 
 import java.io.File;
+import java.util.Base64;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.mongodb.App;
-import io.realm.mongodb.mongo.MongoClient;
-import io.realm.mongodb.mongo.MongoCollection;
-import io.realm.mongodb.mongo.MongoDatabase;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -55,12 +58,8 @@ public class UserProfileActivity extends AppCompatActivity {
         Document customData = app.currentUser().getCustomData();
         String username = customData.getString("username");
         usernameDisplay.setText(username);
-        String path = customData.getString("path");
-        File image = new File(path);
-        if (image.exists()) {
-            Bitmap myBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
-            profileImage.setImageBitmap(myBitmap);
-            Log.v("Image", "successfully set up");
-        }
+        String url = customData.getString("path");
+        Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
     }
 }
+

@@ -2,19 +2,16 @@ package activity.app.android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.bson.Document;
 
 import activity.app.android.util.AESCrypt;
 import io.realm.mongodb.App;
 import io.realm.mongodb.Credentials;
-import io.realm.mongodb.User;
 
 public class WelcomActivity  extends AppCompatActivity {
 
@@ -56,7 +53,6 @@ public class WelcomActivity  extends AppCompatActivity {
                 Toast.makeText(this, "There is something with the password", Toast.LENGTH_SHORT).show();
             }
 
-            // TODO: fetch User from database based on username and compare the password
             Credentials credentials = Credentials.emailPassword(emailTxt, hashedPassword);
             app.loginAsync(credentials, it -> {
                 if (it.isSuccess()) {
