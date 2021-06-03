@@ -7,19 +7,23 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.bson.Document;
+
 import java.io.IOException;
 
 import activity.app.android.util.AESCrypt;
 import activity.app.android.util.PathConverter;
-import io.realm.Realm;
 import io.realm.mongodb.App;
-import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -28,8 +32,9 @@ public class RegisterActivity extends AppCompatActivity {
     Uri uri;
     ImageView preview;
 
-    EditText usernameTxt;
+    EditText emailTxt;
     EditText passwordTxt;
+    EditText usernameTxt;
 
     App app;
 
@@ -40,52 +45,65 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Define components
         preview = findViewById(R.id.user_avatar_preview);
-        usernameTxt = findViewById(R.id.emailTxt_register);
+        emailTxt = findViewById(R.id.emailTxt_register);
         passwordTxt = findViewById(R.id.passwordTxt_register);
-        
-        app = new App(new AppConfiguration.Builder("activity_app-znbjb").build());
+        usernameTxt = findViewById(R.id.usernameTxt_register);
+
+        app = ((MyApplication) this.getApplication()).app;
     }
 
     // TODO: Connect avatar file path with user
     // TODO: Connect activity list and affiliated groups to user
     public void registerOperation(View view) {
-        if (usernameTxt.getText().toString().trim().equals("") || passwordTxt.getText().toString().trim().equals("") || uri == null) {
+        if (emailTxt.getText().toString().trim().equals("") || passwordTxt.getText().toString().trim().equals("") || uri == null) {
             Toast.makeText(this, "Enter the required field", Toast.LENGTH_SHORT).show();
             return;
         }
-        String email = usernameTxt.getText().toString();
+        String email = emailTxt.getText().toString();
         String hashedPassword = "";
         try {
-            hashedPassword = AESCrypt.encrypt(passwordTxt.getText().toString());
+            hashedPassword = AESCrypt.encrypt(passwordTxt.getText().toString().trim());
         } catch (Exception e) {
             Toast.makeText(this, "Please enter the password in correct format", Toast.LENGTH_SHORT).show();
         }
 
-        // path of the avatar
+        // path of the avatar and username
         String path = PathConverter.convertMediaUriToPath(this, uri);
+        String username = usernameTxt.getText().toString();
 
         // register in the realm database
         app.getEmailPassword().registerUserAsync(email, hashedPassword, it->{
             if (it.isSuccess()) {
                 // Log in the newly created user and open user profile page
-                loginNewUser();
+                loginNewUser(path, username);
             } else {
                 Toast.makeText(this, it.getError().getErrorMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void loginNewUser() {
-        String email = usernameTxt.getText().toString();
+    public void loginNewUser(String path, String username) {
+        String email = emailTxt.getText().toString();
         String hashedPassword = "";
         try {
-            hashedPassword = AESCrypt.encrypt(passwordTxt.getText().toString());
+            hashedPassword = AESCrypt.encrypt(passwordTxt.getText().toString().trim());
         } catch (Exception e) {
             Toast.makeText(this, "There is something with the password", Toast.LENGTH_SHORT).show();
         }
         Credentials credentials = Credentials.emailPassword(email, hashedPassword);
         app.loginAsync(credentials, result -> {
             if (result.isSuccess()) {
+                MongoClient mongoClient = app.currentUser().getMongoClient("mongodb-atlas");
+                MongoDatabase mongoDatabase = mongoClient.getDatabase("clubM");
+                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("users");
+                mongoCollection.insertOne(
+                        new Document("user-id-field", app.currentUser().getId()).append("path", path).append("username", username)).getAsync(r -> {
+                            if (r.isSuccess()) {
+                                Log.v("AUTH", "Successfully insert custom user data");
+                            } else {
+                                Log.e("EXAMPLE", "Unable to insert custom user data. Error: " + r.getError());
+                            }
+                });
                 // Automatically open user profile page
                 Intent intent = new Intent(this, UserProfileActivity.class);
                 startActivity(intent);

@@ -44,6 +44,21 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/usernameTxt_register"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:hint="Username"
+        android:textColorHint="#fff"
+        android:fontFamily="@font/nexa_light"
+        android:theme="@style/EditTextTheme"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/emailTxt_register"
         android:layout_marginTop="25dp"
         android:layout_marginRight="40dp"
