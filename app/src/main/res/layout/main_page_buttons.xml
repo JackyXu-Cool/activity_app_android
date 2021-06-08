@@ -15,17 +15,10 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
+        android:id="@+id/schoolListBtn"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/map"/>
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/community" />
 
     <ImageButton
         android:layout_width="0dp"
@@ -37,14 +30,6 @@
         android:background="?android:selectableItemBackground"
         android:src="@drawable/start_buttom" />
 
-    <ImageButton
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:background="?android:selectableItemBackground"
-        android:src="@drawable/team" />
 
     <ImageButton
         android:layout_width="0dp"
@@ -52,6 +37,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
+        android:id="@+id/profileBtn"
         android:background="?android:selectableItemBackground"
         android:src="@drawable/profile" />
 

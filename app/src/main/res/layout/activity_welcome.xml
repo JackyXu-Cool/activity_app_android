@@ -74,14 +74,4 @@
         android:backgroundTint="@color/colorPrimary"
         android:text="Switch to Register" />
 
-    <TextView
-        android:layout_marginTop="30sp"
-        android:textColor="#fff"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="changeToSelectPage"
-        android:text="Get started as guest"/>
-
 </LinearLayout>

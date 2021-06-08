@@ -1,24 +1,18 @@
 package activity.app.android;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import org.bson.Document;
 
-import java.io.File;
-import java.util.Base64;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.mongodb.App;
@@ -28,7 +22,8 @@ public class UserProfileActivity extends AppCompatActivity {
     App app;
 
     TextView usernameDisplay;
-    CircleImageView profileImage;
+    CircleImageView profileImage; // Set up toolbars
+    ImageButton schoolListBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +32,27 @@ public class UserProfileActivity extends AppCompatActivity {
 
         usernameDisplay = findViewById(R.id.username_profile);
         profileImage = findViewById(R.id.user_avatar_on_profile);
+        schoolListBtn = findViewById(R.id.schoolListBtn);
 
         app = ((MyApplication) this.getApplication()).app;
 
         setUpInformation();
+        schoolListBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Document customData = app.currentUser().getCustomData();
+                String school = customData.getString("school");
+                if (school == null || school.length() == 0) {
+                    Intent intent = new Intent(UserProfileActivity.this, SelectSchoolActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(UserProfileActivity.this, GroupListActivity.class);
+                    intent.putExtra("school_name", school);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
     }
 
     public void logoutOperation(View view) {
@@ -60,6 +72,11 @@ public class UserProfileActivity extends AppCompatActivity {
         usernameDisplay.setText(username);
         String url = customData.getString("path");
         Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
+    }
+
+    public void editProfileOperation(View view) {
+        Intent intent = new Intent(this, EditProfileActivity.class);
+        startActivity(intent);
     }
 }
 

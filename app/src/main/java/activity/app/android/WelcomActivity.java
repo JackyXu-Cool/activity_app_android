@@ -28,12 +28,6 @@ public class WelcomActivity  extends AppCompatActivity {
         app = ((MyApplication) this.getApplication()).app;
     }
 
-    public void changeToSelectPage(View view) {
-        Intent intent = new Intent(this, SelectSchoolActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     public void switchToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

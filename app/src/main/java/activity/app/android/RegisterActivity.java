@@ -149,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
                 MongoDatabase mongoDatabase = mongoClient.getDatabase("clubM");
                 MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("users");
                 mongoCollection.insertOne(
-                        new Document("user-id-field", app.currentUser().getId()).append("path", path).append("username", username)).getAsync(r -> {
+                        new Document("user-id-field", app.currentUser().getId()).append("path", path).append("username", username).append("school", "")).getAsync(r -> {
                             if (r.isSuccess()) {
                                 Log.v("AUTH", "Successfully insert custom user data");
                             } else {

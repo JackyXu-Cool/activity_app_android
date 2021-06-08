@@ -72,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="参加过的活动"
+                    android:text="Activity"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:textSize="18sp"/>
@@ -98,7 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="参加的小组"
+                    android:text="Group"
                     android:textStyle="bold"
                     android:textColor="#fff"
                     android:textSize="18sp"/>
@@ -107,19 +107,36 @@
 
         </LinearLayout>
 
+
         <com.google.android.material.button.MaterialButton
             app:strokeColor="#fff"
             app:strokeWidth="1dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:onClick="editProfileOperation"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Edit Your Profile" />
+
+        <com.google.android.material.button.MaterialButton
+            app:strokeColor="#fff"
+            app:strokeWidth="1dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:onClick="logoutOperation"
             android:backgroundTint="@color/colorPrimary"
             android:text="Logout" />
 
     </LinearLayout>
+
+    <!-- Section for showing the group the user has joined in-->
+
+
 
     <!-- button group -->
     <include layout="@layout/main_page_buttons"
