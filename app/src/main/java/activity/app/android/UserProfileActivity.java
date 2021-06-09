@@ -39,18 +39,21 @@ public class UserProfileActivity extends AppCompatActivity {
         setUpInformation();
         schoolListBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Document customData = app.currentUser().getCustomData();
-                String school = customData.getString("school");
-                if (school == null || school.length() == 0) {
-                    Intent intent = new Intent(UserProfileActivity.this, SelectSchoolActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(UserProfileActivity.this, GroupListActivity.class);
-                    intent.putExtra("school_name", school);
-                    startActivity(intent);
-                    finish();
-                }
+                app.currentUser().refreshCustomData(task -> {
+                    if (task.isSuccess()) {
+                        String school = task.get().getString("school");
+                        if (school == null || school.length() == 0) {
+                            Intent intent = new Intent(UserProfileActivity.this, SelectSchoolActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(UserProfileActivity.this, GroupListActivity.class);
+                            intent.putExtra("school_name", school);
+                            startActivity(intent);
+                        }
+                    } else {
+                        Log.e("ERROR", "Fail to fetch refresh data");
+                    }
+                });
             }
         });
     }
@@ -67,11 +70,17 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void setUpInformation() {
-        Document customData = app.currentUser().getCustomData();
-        String username = customData.getString("username");
-        usernameDisplay.setText(username);
-        String url = customData.getString("path");
-        Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
+        app.currentUser().refreshCustomData(task -> {
+            if (task.isSuccess()) {
+                Document customData = task.get();
+                String username = customData.getString("username");
+                usernameDisplay.setText(username);
+                String url = customData.getString("path");
+                Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
+            } else {
+                Log.e("Error", "Fail to latest data");
+            }
+        });
     }
 
     public void editProfileOperation(View view) {
