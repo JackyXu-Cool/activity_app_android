@@ -1,31 +1,33 @@
 package activity.app.android.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.bson.types.ObjectId;
 
+import java.util.Date;
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-// TODO: create realm model
-public class Group{
+// TODO: create realm schema on Atlas
+// TODO: remove function for groupmemebers and activies
+public class Group extends RealmObject{
     @PrimaryKey
     private String groupName;
     private String groupIntroduction;
     private String coverURL;  // Cover photo for this group
     private Date createdDate;
 
-    private List<String> groupMembers; // String stores the user id
-    private List<String> activityList; // String stores the activity id
+    private RealmList<ObjectId> groupMembers;
+    private RealmList<Activity> activities;
 
     public Group() {}
 
-    // TODO: CoverURL should be replaced by file (image file...??)
     public Group (String groupName, String groupIntroduction, String coverURL) {
         this.groupName = groupName;
         this.groupIntroduction = groupIntroduction;
         this.coverURL = coverURL;
         this.createdDate = new Date();
+        groupMembers = new RealmList<>();
+        activities = new RealmList<>();
     }
 
     public Group(Group anotherGroup) {
@@ -67,19 +69,19 @@ public class Group{
         this.createdDate = createdDate;
     }
 
-    public List<String> getGroupMembers() {
+    public RealmList<ObjectId> getGroupMembers() {
         return groupMembers;
     }
 
-    public void setGroupMembers(List<String> groupMembers) {
-        this.groupMembers = new ArrayList<>(groupMembers);
+    public void addMembers(ObjectId id) {
+        groupMembers.add(id);
     }
 
-    public List<String> getActivityList() {
-        return activityList;
+    public RealmList<Activity> getActivities() {
+        return activities;
     }
 
-    public void setActivityList(List<String> activityList) {
-        this.activityList = new ArrayList<>(activityList);
+    public void addActivity(Activity a) {
+        activities.add(a);
     }
 }
