@@ -66,8 +66,7 @@
                     android:layout_gravity="center"
                     android:textSize="26sp"
                     android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:text="12"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,8 +91,7 @@
                     android:layout_gravity="center"
                     android:textSize="26sp"
                     android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:text="3"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"

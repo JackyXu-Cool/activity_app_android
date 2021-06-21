@@ -24,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,7 @@ import java.io.InputStream;
 
 import activity.app.android.util.AESCrypt;
 import activity.app.android.util.PathConverter;
+import io.realm.RealmList;
 import io.realm.mongodb.App;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.mongo.MongoClient;
@@ -69,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
         app = ((MyApplication) this.getApplication()).app;
     }
 
-    // TODO: Connect activity list and affiliated groups to user
     public void registerOperation(View view) {
         if (emailTxt.getText().toString().trim().equals("") || passwordTxt.getText().toString().trim().equals("") || uri == null) {
             Toast.makeText(this, "Enter the required field", Toast.LENGTH_SHORT).show();
@@ -149,7 +150,8 @@ public class RegisterActivity extends AppCompatActivity {
                 MongoDatabase mongoDatabase = mongoClient.getDatabase("clubM");
                 MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("users");
                 mongoCollection.insertOne(
-                        new Document("user-id-field", app.currentUser().getId()).append("path", path).append("username", username).append("school", "")).getAsync(r -> {
+                        new Document("user-id-field", app.currentUser().getId()).append("path", path).append("username", username).append("school", "")
+                                .append("activities", new RealmList<>()).append("groups", new RealmList<>())).getAsync(r -> {
                             if (r.isSuccess()) {
                                 Log.v("AUTH", "Successfully insert custom user data");
                             } else {

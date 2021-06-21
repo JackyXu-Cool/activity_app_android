@@ -8,13 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.realm.RealmList;
 import io.realm.mongodb.App;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -24,6 +28,8 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView usernameDisplay;
     CircleImageView profileImage; // Set up toolbars
     ImageButton schoolListBtn;
+    TextView numberOfActivities;
+    TextView numberOfGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,8 @@ public class UserProfileActivity extends AppCompatActivity {
         usernameDisplay = findViewById(R.id.username_profile);
         profileImage = findViewById(R.id.user_avatar_on_profile);
         schoolListBtn = findViewById(R.id.schoolListBtn);
+        numberOfActivities = findViewById(R.id.number_of_activities_profile);
+        numberOfGroups = findViewById(R.id.number_of_groups_profile);
 
         app = ((MyApplication) this.getApplication()).app;
 
@@ -73,10 +81,19 @@ public class UserProfileActivity extends AppCompatActivity {
         app.currentUser().refreshCustomData(task -> {
             if (task.isSuccess()) {
                 Document customData = task.get();
+                // Set up username and load image
                 String username = customData.getString("username");
                 usernameDisplay.setText(username);
                 String url = customData.getString("path");
                 Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
+                // Set up number of groups and activities
+                int groupSize = customData.getList("groups", ObjectId.class).size();
+                int activitySize = customData.getList("activities", ObjectId.class).size();
+                Log.v("activitysize", activitySize + "");
+                Log.v("groupsize", groupSize + "");
+                // should convert the text into a string, otherwise it will call setText(int), where int is a resource id
+                numberOfGroups.setText(groupSize + " ");
+                numberOfActivities.setText(activitySize + " ");
             } else {
                 Log.e("Error", "Fail to latest data");
             }
