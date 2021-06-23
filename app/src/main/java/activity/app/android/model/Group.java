@@ -3,25 +3,30 @@ package activity.app.android.model;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
+import java.util.UUID;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
-// TODO: create realm schema on Atlas
-// TODO: remove function for groupmemebers and activies
 public class Group extends RealmObject{
     @PrimaryKey
+    private String _id;
     private String groupName;
     private String groupIntroduction;
     private String coverURL;  // Cover photo for this group
     private Date createdDate;
 
-    private RealmList<ObjectId> groupMembers;
-    private RealmList<Activity> activities;
+    @Required
+    private RealmList<ObjectId> groupMembers; // user id of those who is in this group
+    @Required
+    private RealmList<ObjectId> activities; // activity id belong to this group
 
     public Group() {}
 
     public Group (String groupName, String groupIntroduction, String coverURL) {
+        this._id = UUID.randomUUID().toString();
         this.groupName = groupName;
         this.groupIntroduction = groupIntroduction;
         this.coverURL = coverURL;
@@ -77,11 +82,21 @@ public class Group extends RealmObject{
         groupMembers.add(id);
     }
 
-    public RealmList<Activity> getActivities() {
+    public ObjectId removeMembers(ObjectId id) {
+        groupMembers.remove(id);
+        return id;
+    }
+
+    public RealmList<ObjectId> getActivities() {
         return activities;
     }
 
-    public void addActivity(Activity a) {
-        activities.add(a);
+    public void addActivity(ObjectId id) {
+        activities.add(id);
+    }
+
+    public String removeActivity(String id) {
+        activities.remove(id);
+        return id;
     }
 }

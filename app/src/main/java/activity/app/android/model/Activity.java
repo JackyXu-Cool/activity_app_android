@@ -3,27 +3,32 @@ package activity.app.android.model;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
+import java.util.UUID;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
 
-// TODO: create realm schema Atlas
-// TODO: check if remove function is correct.
 public class Activity extends RealmObject {
+    @PrimaryKey
+    private String _id;
     private String name; // activity name
     private String imageURL;
     private String location;
     private Date activtiyDate;
-    private RealmList<ObjectId> users; // users that sign up for this activity
+    @Required
+    private RealmList<ObjectId> signUpUsers; // users id that sign up for this activity
 
     public Activity() {}
 
     public Activity(String name, String imageURL, String location, Date activtiyDate) {
+        this._id = UUID.randomUUID().toString();
         this.name = name;
         this.imageURL = imageURL;
         this.location = location;
         this.activtiyDate = activtiyDate;
-        users = new RealmList<>();
+        this.signUpUsers = new RealmList<>();
     }
 
     public String getName() { return name; }
@@ -55,15 +60,15 @@ public class Activity extends RealmObject {
     }
 
     public void addNewUser(ObjectId id) {
-        users.add(id);
+        this.signUpUsers.add(id);
     }
 
     public RealmList<ObjectId> getAllUsers() {
-        return users;
+        return signUpUsers;
     }
 
-    public ObjectId removeUser(ObjectId id) {
-        users.remove(id);
+    public String removeUser(String id) {
+        this.signUpUsers.remove(id);
         return id;
     }
 }

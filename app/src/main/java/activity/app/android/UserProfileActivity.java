@@ -8,18 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.List;
 
+import activity.app.android.model.Group;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.realm.RealmList;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.mongodb.App;
+import io.realm.mongodb.sync.SyncConfiguration;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -43,6 +44,25 @@ public class UserProfileActivity extends AppCompatActivity {
         numberOfGroups = findViewById(R.id.number_of_groups_profile);
 
         app = ((MyApplication) this.getApplication()).app;
+
+        // TODO: check this out
+        // Below is a working code that can successfully use realm sync.
+//        SyncConfiguration config = new SyncConfiguration.Builder(app.currentUser(), "clubM_data")
+//                .allowQueriesOnUiThread(true)
+//                .allowWritesOnUiThread(true)
+//                .build();
+//        Realm.getInstanceAsync(config, new Realm.Callback() {
+//            @Override
+//            public void onSuccess(Realm realm) {
+//                Log.v("EXAMPLE", "Successfully opened a realm.");
+//                // Write to the realm. No special syntax required for synced realms.
+//                realm.executeTransaction(r -> {
+//                    r.insert(new Group("Basketball team", "A basketball team", "www.basketball.com"));
+//                });
+//                // Don't forget to close your realm!
+//                realm.close();
+//            }
+//        });
 
         setUpInformation();
         schoolListBtn.setOnClickListener(new View.OnClickListener(){
