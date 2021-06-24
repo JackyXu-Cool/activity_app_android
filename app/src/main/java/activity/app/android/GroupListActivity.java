@@ -51,10 +51,4 @@ public class GroupListActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public void changeToGroupPage(View view) {
-        Intent intent = new Intent(this, ApplyGroupActivity.class);
-        intent.putExtra("Group_ID", "587c3f1af4");
-        startActivity(intent);
-    }
 }

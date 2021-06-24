@@ -22,18 +22,10 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"/>
 
+<!-- TODO: CREATE GROUP LIST VIEW -->
 <!--    <ListView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_weight="7"/>-->
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sample group page"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/colorPrimary"
-        android:onClick="changeToGroupPage"/>
 
 </LinearLayout>

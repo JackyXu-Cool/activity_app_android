@@ -59,9 +59,9 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             if (task.isSuccess()) {
                 long count = task.get().getModifiedCount();
                 if (count == 1) {
-                    Log.v("EXAMPLE", "successfully updated a document.");
+                    Log.v("Success", "successfully updated a document.");
                 } else {
-                    Log.v("EXAMPLE", "did not update a document.");
+                    Log.v("ERROR", "did not update a document.");
                 }
                 finish();
             } else {

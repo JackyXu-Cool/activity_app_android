@@ -2,6 +2,7 @@ package activity.app.android;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import activity.app.android.model.Group;
 import activity.app.android.util.AESCrypt;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import io.realm.exceptions.RealmMigrationNeededException;
 import io.realm.mongodb.App;
 import io.realm.mongodb.Credentials;
@@ -31,7 +33,6 @@ public class WelcomActivity  extends AppCompatActivity {
         password = findViewById(R.id.passwordTxt);
         app = ((MyApplication) this.getApplication()).app;
 
-        // At this time, 'Activity' and 'Group' data model is set up in default.realm file. We can add/update/remove information
         // If want to delete realm file, uninstall the app
     }
 

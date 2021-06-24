@@ -19,6 +19,7 @@ import activity.app.android.model.Group;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import io.realm.mongodb.App;
 import io.realm.mongodb.sync.SyncConfiguration;
 
@@ -63,6 +64,14 @@ public class UserProfileActivity extends AppCompatActivity {
 //                realm.close();
 //            }
 //        });
+//        SyncConfiguration config = new SyncConfiguration.Builder(
+//                app.currentUser(),
+//                "clubM_data")
+//                .build();
+//        Realm backgroundThreadRealm = Realm.getInstance(config);
+//        RealmResults<Group> groups = backgroundThreadRealm.where(Group.class).findAll();
+//        Log.v("info", "" + groups.get(0).getGroupName());
+//        Log.d("path", backgroundThreadRealm.getPath());
 
         setUpInformation();
         schoolListBtn.setOnClickListener(new View.OnClickListener(){
