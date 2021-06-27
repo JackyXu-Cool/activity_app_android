@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
     tools:context=".GroupListActivity">
 
     <!-- Top navigation bar element-->
@@ -19,16 +18,15 @@
         android:textSize="28sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1"/>
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:id="@+id/groupList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider = "#000"
-        android:footerDividersEnabled = "false"
-        android:headerDividersEnabled = "false"
-        android:layout_weight="8"/>
+        android:divider = "@color/colorPrimary"
+        android:dividerHeight="2px"
+        android:footerDividersEnabled = "true"
+        android:headerDividersEnabled = "true" />
 
 </LinearLayout>

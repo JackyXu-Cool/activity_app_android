@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -15,16 +16,22 @@ import java.util.ArrayList;
 
 import activity.app.android.model.Group;
 import activity.app.android.util.GroupListAdapter;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.mongodb.App;
+import io.realm.mongodb.sync.SyncConfiguration;
 
 public class GroupListActivity extends AppCompatActivity {
 
     TextView school;
     ListView list;
+    App app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
+        app = ((MyApplication) this.getApplication()).app;
 
         // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -37,11 +44,18 @@ public class GroupListActivity extends AppCompatActivity {
         school = findViewById(R.id.schoolName);
         school.setText(getIntent().getStringExtra("school_name"));
 
-        // TODO: set up group list with real group data
-        // TODO: Adjust the toolbar margin (it's too big right now)
+        // Set up the group display
         list = findViewById(R.id.groupList);
         ArrayList<Group> groups = new ArrayList<>();
-        groups.add(new Group("CSGO TEAM", "A group for playing csgo", "https://cdn.akamai.steamstatic.com/steam/apps/730/capsule_616x353.jpg?t=1612812939"));
+        SyncConfiguration config = new SyncConfiguration.Builder(app.currentUser(), "clubM_data")
+                .allowQueriesOnUiThread(true)
+                .allowWritesOnUiThread(true)
+                .build();
+        Realm backgroundThreadRealm = Realm.getInstance(config);
+        RealmResults<Group> fetchedGroup = backgroundThreadRealm.where(Group.class).findAll();
+        for (Group g: fetchedGroup) {
+            groups.add(g);
+        }
         GroupListAdapter adapter = new GroupListAdapter(this, groups);
         list.setAdapter(adapter);
     }

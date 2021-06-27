@@ -58,7 +58,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //                Log.v("EXAMPLE", "Successfully opened a realm.");
 //                // Write to the realm. No special syntax required for synced realms.
 //                realm.executeTransaction(r -> {
-//                    r.insert(new Group("Basketball team", "A basketball team", "www.basketball.com"));
+//                    r.insert(new Group("FIFA Gaming Club", "Club for playing FIFA", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNIQovuEBIXdJx--J0OWBnUkoRj0uj6KELYA&usqp=CAU"));
 //                });
 //                // Don't forget to close your realm!
 //                realm.close();
@@ -67,8 +67,13 @@ public class UserProfileActivity extends AppCompatActivity {
 //        SyncConfiguration config = new SyncConfiguration.Builder(
 //                app.currentUser(),
 //                "clubM_data")
+//                .allowWritesOnUiThread(true)
 //                .build();
 //        Realm backgroundThreadRealm = Realm.getInstance(config);
+//        backgroundThreadRealm.executeTransaction(t -> {
+//            Group deleted = t.where(Group.class).equalTo("_id", "e23bc515-58c0-4b5f-a49a-86c2b81fd89f").findFirst();
+//            deleted.deleteFromRealm();
+//        });
 //        RealmResults<Group> groups = backgroundThreadRealm.where(Group.class).findAll();
 //        Log.v("info", "" + groups.get(0).getGroupName());
 //        Log.d("path", backgroundThreadRealm.getPath());
