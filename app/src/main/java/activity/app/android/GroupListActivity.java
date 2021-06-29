@@ -1,21 +1,32 @@
 package activity.app.android;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import activity.app.android.model.Group;
-import activity.app.android.util.GroupListAdapter;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.mongodb.App;
@@ -76,6 +87,84 @@ public class GroupListActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Private class groupListAdapter
+    private class GroupListAdapter implements ListAdapter {
+        ArrayList<Group> groupList;
+        Context context;
+        public GroupListAdapter(Context context, ArrayList<Group> groupList) {
+            this.groupList = groupList;
+            this.context=context;
+        }
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false;
+        }
+        @Override
+        public boolean isEnabled(int position) {
+            return true;
+        }
+        @Override
+        public void registerDataSetObserver(DataSetObserver observer) {
+        }
+        @Override
+        public void unregisterDataSetObserver(DataSetObserver observer) {
+        }
+        @Override
+        public int getCount() {
+            return groupList.size();
+        }
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+        @Override
+        public boolean hasStableIds() {
+            return false;
+        }@Override
+        public int getItemViewType(int position) {
+            return position;
+        }
+        @Override
+        public int getViewTypeCount() {
+            return groupList.size();
+        }
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Group group = groupList.get(position);
+            if(convertView==null) {
+                LayoutInflater layoutInflater = LayoutInflater.from(context);
+                convertView = layoutInflater.inflate(R.layout.list_item, null);
+                convertView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), ApplyGroupActivity.class);
+                        intent.putExtra("group_intro", group.getGroupIntroduction());
+                        intent.putExtra("group_url", group.getCoverURL());
+                        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+                        intent.putExtra("group_date", dateFormat.format(group.getCreatedDate()));
+                        startActivity(intent);
+                    }
+                });
+                TextView title = convertView.findViewById(R.id.group_title);
+                ImageView img = convertView.findViewById(R.id.group_image);
+                title.setText(group.getGroupName());
+
+                Glide.with(context)
+                        .load(group.getCoverURL())
+                        .into(img);
+            }
+            return convertView;
         }
     }
 }

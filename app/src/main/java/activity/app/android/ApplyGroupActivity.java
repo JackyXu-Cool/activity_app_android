@@ -130,28 +130,9 @@ public class ApplyGroupActivity extends AppCompatActivity{
             groupContent.setVisibility(View.GONE);
             avatar.setVisibility(View.GONE);
 
-//            try {
-//                BmobQuery<Group> bmobQuery = new BmobQuery<Group>();
-//                bmobQuery.getObject(getIntent().getStringExtra("Group_ID"), new QueryListener<Group>() {
-//                    @Override
-//                    public void done(Group group,BmobException e) {
-//                        if(e==null){
-//                            mbinding.setGroup(group);
-//
-//                            // Set Image view, group introduction, and created date
-//                            setGroupCover(group.getCoverURL());
-//                            setGroupIntro(group.getGroupIntroduction());
-//                            setGroupCreatedDate(group.getCreatedDate());
-//
-//                        }else{
-//                            throw new NoSuchElementException("Cannot find group");
-//                        }
-//                    }
-//                });
-//
-//            } catch(Exception e) {
-//                finish(); // Return to the previous page is group not found
-//            }
+            setGroupCover(getIntent().getStringExtra("group_url"));
+            setGroupIntro(getIntent().getStringExtra("group_intro"));
+            setGroupCreatedDate(getIntent().getStringExtra("group_date"));
             super.onPreExecute();
         }
 
@@ -178,10 +159,9 @@ public class ApplyGroupActivity extends AppCompatActivity{
         }
 
         // Private method that set the created date of this group
-        private void setGroupCreatedDate(Date date) {
-            DateFormat df = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA);
+        private void setGroupCreatedDate(String date) {
             TextView txtCreatedDate = findViewById(R.id.groupDateText);
-            txtCreatedDate.setText("成立时间：" + df.format(date));
+            txtCreatedDate.setText("Created on：" + date);
         }
 
         // Private method that set up group's cover

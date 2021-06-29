@@ -123,8 +123,6 @@ public class UserProfileActivity extends AppCompatActivity {
                 // Set up number of groups and activities
                 int groupSize = customData.getList("groups", ObjectId.class).size();
                 int activitySize = customData.getList("activities", ObjectId.class).size();
-                Log.v("activitysize", activitySize + "");
-                Log.v("groupsize", groupSize + "");
                 // should convert the text into a string, otherwise it will call setText(int), where int is a resource id
                 numberOfGroups.setText(groupSize + " ");
                 numberOfActivities.setText(activitySize + " ");

@@ -4,16 +4,20 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:gravity="center">
 
     <ImageView
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_width="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="120dp"
         android:layout_height="80dp"
         android:id="@+id/group_image"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         android:importantForAccessibility="no"
         android:scaleType="centerCrop" />
 
@@ -21,7 +25,11 @@
         android:textSize="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
         android:layout_gravity="center_vertical"
+        android:textIsSelectable="false"
         android:id="@+id/group_title"/>
 
 </LinearLayout>
