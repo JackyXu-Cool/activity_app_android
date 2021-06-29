@@ -151,6 +151,8 @@ public class GroupListActivity extends AppCompatActivity {
                         Intent intent = new Intent(v.getContext(), ApplyGroupActivity.class);
                         intent.putExtra("group_intro", group.getGroupIntroduction());
                         intent.putExtra("group_url", group.getCoverURL());
+                        intent.putExtra("group_name", group.getGroupName());
+                        intent.putExtra("group_size", group.getGroupMembers().size());
                         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
                         intent.putExtra("group_date", dateFormat.format(group.getCreatedDate()));
                         startActivity(intent);

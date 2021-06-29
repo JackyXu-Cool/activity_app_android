@@ -23,11 +23,10 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/activityName"
+                android:id="@+id/group_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
-                android:text="@{secondaryGroup.groupName}"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_alignParentStart="true"/>
@@ -40,7 +39,7 @@
 
         </RelativeLayout>
 
-        <!-- Activity Date -->
+        <!-- group created date -->
         <LinearLayout
             android:id="@+id/groupDate"
             android:layout_width="wrap_content"

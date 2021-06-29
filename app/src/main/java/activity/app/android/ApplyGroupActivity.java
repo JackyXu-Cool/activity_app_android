@@ -21,24 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.NoSuchElementException;
-
-import activity.app.android.databinding.ActivityApplyGroupBinding;
-import activity.app.android.model.Group;
-
 public class ApplyGroupActivity extends AppCompatActivity{
-
-    // Fetch private bmob key from cpp file
-    static {
-        System.loadLibrary("keys");
-    }
-    public native String getNativeKey1();
-    String key1 = new String(Base64.decode(getNativeKey1(), Base64.DEFAULT));
-
     // Declare useful elemnt from the page
     Button displayDocs;
     Button displayHighlights;
@@ -48,16 +31,12 @@ public class ApplyGroupActivity extends AppCompatActivity{
     LinearLayout progressView;
     LinearLayout groupContent;
     LinearLayout slidingButtons;
-    ActivityApplyGroupBinding mbinding;
     SlidingUpPanelLayout panel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        // Apply data binding
-        mbinding = DataBindingUtil.setContentView(this, R.layout.activity_apply_group);
+        setContentView(R.layout.activity_apply_group);
 
         // Define view elements
         groupContent = findViewById(R.id.group);
@@ -133,6 +112,8 @@ public class ApplyGroupActivity extends AppCompatActivity{
             setGroupCover(getIntent().getStringExtra("group_url"));
             setGroupIntro(getIntent().getStringExtra("group_intro"));
             setGroupCreatedDate(getIntent().getStringExtra("group_date"));
+            setGroupName(getIntent().getStringExtra("group_name"));
+            setGroupSize(getIntent().getIntExtra("group_size", 0));
             super.onPreExecute();
         }
 
@@ -174,6 +155,18 @@ public class ApplyGroupActivity extends AppCompatActivity{
         private void setGroupIntro(String intro){
             TextView txtGroupIntro = findViewById(R.id.group_intro_content);
             txtGroupIntro.setText(intro);
+        }
+
+        // private method that set up group name
+        private void setGroupName(String name) {
+            TextView txtGroupName = findViewById(R.id.group_name);
+            txtGroupName.setText(name);
+        }
+
+        // private method that set up group size
+        private void setGroupSize(int size) {
+            TextView txtGroupSize = findViewById(R.id.groupNumberTxt);
+            txtGroupSize.setText("Number of members: " + size);
         }
     }
 
