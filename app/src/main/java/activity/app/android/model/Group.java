@@ -42,6 +42,10 @@ public class Group extends RealmObject{
         this.createdDate = new Date(anotherGroup.getCreatedDate().getTime());
     }
 
+    public String getId() {
+        return _id;
+    }
+
     public String getGroupName() {
         return groupName;
     }

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +22,21 @@ import android.widget.ViewFlipper;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.button.MaterialButton;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import activity.app.android.model.Group;
+import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.mongodb.App;
+import io.realm.mongodb.User;
+import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
+import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.sync.SyncConfiguration;
 
 public class ApplyGroupActivity extends AppCompatActivity{
     // Declare useful elemnt from the page
@@ -32,17 +49,21 @@ public class ApplyGroupActivity extends AppCompatActivity{
     LinearLayout groupContent;
     LinearLayout slidingButtons;
     SlidingUpPanelLayout panel;
+    App app;
+    MaterialButton applyBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apply_group);
+        app = ((MyApplication) this.getApplication()).app;
 
         // Define view elements
         groupContent = findViewById(R.id.group);
         progressView = findViewById(R.id.progressbar_view);
         slidingButtons = findViewById(R.id.slidingButtons);
         panel = findViewById(R.id.slidingpanel_group_whole);
+        applyBtn = findViewById(R.id.apply);
 
         // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -97,6 +118,9 @@ public class ApplyGroupActivity extends AppCompatActivity{
         // Set up sliding button groups functionality
         sliding_buttongroups_setup();
         slidingContentSelector.setDisplayedChild(1);
+
+        // check if the button needs to be disabled
+        checkUserhasJoined();
 
         new Task().execute();
     }
@@ -196,5 +220,55 @@ public class ApplyGroupActivity extends AppCompatActivity{
         displayHighlights.setText(buttonNames[1]);
         displayHighlights.setSelected(true);
         displayMoments.setText(buttonNames[2]);
+    }
+
+    // Disable the apply button if the user is already in this group
+    public void checkUserhasJoined() {
+        SyncConfiguration config = new SyncConfiguration.Builder(
+                app.currentUser(),
+                "clubM_data")
+                .allowWritesOnUiThread(true)
+                .build();
+        Realm backgroundThreadRealm = Realm.getInstance(config);
+        Group group = backgroundThreadRealm.where(Group.class).equalTo("_id", getIntent().getStringExtra("group_id")).findFirst();
+        if (group.getGroupMembers().contains(new ObjectId(app.currentUser().getId()))) {
+            applyBtn.setEnabled(false);
+            applyBtn.setBackgroundColor(Color.parseColor("#D3D3D3"));
+        }
+    }
+
+    // User join the group
+    public void joinGroup(View view) {
+        String group_id = getIntent().getStringExtra("group_id");
+        // update group list in users collection
+        MongoClient mongoClient = app.currentUser().getMongoClient("mongodb-atlas");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("clubM");
+        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("users");
+        mongoCollection.updateOne(new Document("user-id-field", app.currentUser().getId()), new Document("$push", new Document("groups", group_id))).getAsync(t -> {
+            if (t.isSuccess()) {
+                long count = t.get().getModifiedCount();
+                if (count == 1) {
+                    Log.v("Success", "successfully updated a document.");
+                } else {
+                    Log.v("ERROR", "did not update a document.");
+                }
+                finish();
+            } else {
+                Log.e("ERROR", "Fail to update information");
+            }
+        });
+        // update members list in group collection
+        SyncConfiguration config = new SyncConfiguration.Builder(
+                app.currentUser(),
+                "clubM_data")
+                .allowWritesOnUiThread(true)
+                .build();
+        Realm backgroundThreadRealm = Realm.getInstance(config);
+        backgroundThreadRealm.executeTransaction(r -> {
+            Group chosenGroup = r.where(Group.class).equalTo("_id", group_id).findFirst();
+            chosenGroup.addMembers(new ObjectId(app.currentUser().getId()));
+        });
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        startActivity(intent);
     }
 }

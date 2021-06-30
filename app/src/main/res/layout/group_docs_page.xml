@@ -10,12 +10,13 @@
         android:text="@string/group_introduction"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:textSize="14sp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/group_intro_content"
+        android:textSize="18sp"
         />
 
 </LinearLayout>

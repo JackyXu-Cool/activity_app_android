@@ -71,7 +71,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //                .build();
 //        Realm backgroundThreadRealm = Realm.getInstance(config);
 //        backgroundThreadRealm.executeTransaction(t -> {
-//            Group deleted = t.where(Group.class).equalTo("_id", "e23bc515-58c0-4b5f-a49a-86c2b81fd89f").findFirst();
+//            Group deleted = t.where(Group.class).equalTo("groupName", "FIFA Gaming Club").findFirst();
 //            deleted.deleteFromRealm();
 //        });
 //        RealmResults<Group> groups = backgroundThreadRealm.where(Group.class).findAll();
@@ -121,8 +121,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 String url = customData.getString("path");
                 Glide.with(UserProfileActivity.this).load(url).centerCrop().into(profileImage);
                 // Set up number of groups and activities
-                int groupSize = customData.getList("groups", ObjectId.class).size();
-                int activitySize = customData.getList("activities", ObjectId.class).size();
+                int groupSize = customData.getList("groups", String.class).size();
+                int activitySize = customData.getList("activities", String.class).size();
                 // should convert the text into a string, otherwise it will call setText(int), where int is a resource id
                 numberOfGroups.setText(groupSize + " ");
                 numberOfActivities.setText(activitySize + " ");

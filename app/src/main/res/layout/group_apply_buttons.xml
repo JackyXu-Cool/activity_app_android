@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginBottom="5dp"
     android:id="@+id/activityButtonGroup">
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/apply"
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="Apply"
+        android:textSize="22dp"
+        app:cornerRadius="15dp"
+        android:textColor="#fff"
         android:id="@+id/apply"
-        android:background="?android:selectableItemBackground"/>
+        android:onClick="joinGroup"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:src="@drawable/collect"
         android:id="@+id/collect"
         android:layout_marginStart="10dp"
