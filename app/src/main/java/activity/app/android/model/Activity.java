@@ -17,17 +17,19 @@ public class Activity extends RealmObject {
     private String imageURL;
     private String location;
     private Date activtiyDate;
+    private ObjectId belongToGroup;
     @Required
     private RealmList<ObjectId> signUpUsers; // users id that sign up for this activity
 
     public Activity() {}
 
-    public Activity(String name, String imageURL, String location, Date activtiyDate) {
+    public Activity(String name, String imageURL, String location, Date activtiyDate, ObjectId belongToGroup) {
         this._id = UUID.randomUUID().toString();
         this.name = name;
         this.imageURL = imageURL;
         this.location = location;
         this.activtiyDate = activtiyDate;
+        this.belongToGroup = belongToGroup;
         this.signUpUsers = new RealmList<>();
     }
 
@@ -70,5 +72,13 @@ public class Activity extends RealmObject {
     public String removeUser(String id) {
         this.signUpUsers.remove(id);
         return id;
+    }
+
+    public ObjectId getBelongToGroup() {
+        return belongToGroup;
+    }
+
+    public void setBelongToGroup(ObjectId id) {
+        this.belongToGroup = id;
     }
 }

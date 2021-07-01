@@ -15,6 +15,7 @@ public class Group extends RealmObject{
     private String _id;
     private String groupName;
     private String groupIntroduction;
+    private String schoolName;
     private String coverURL;  // Cover photo for this group
     private Date createdDate;
 
@@ -25,11 +26,12 @@ public class Group extends RealmObject{
 
     public Group() {}
 
-    public Group (String groupName, String groupIntroduction, String coverURL) {
+    public Group (String groupName, String groupIntroduction, String coverURL, String schoolName) {
         this._id = UUID.randomUUID().toString();
         this.groupName = groupName;
         this.groupIntroduction = groupIntroduction;
         this.coverURL = coverURL;
+        this.schoolName = schoolName;
         this.createdDate = new Date();
         groupMembers = new RealmList<>();
         activities = new RealmList<>();
@@ -102,5 +104,13 @@ public class Group extends RealmObject{
     public String removeActivity(String id) {
         activities.remove(id);
         return id;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String name) {
+        this.schoolName = name;
     }
 }

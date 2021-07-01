@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import io.realm.mongodb.sync.SyncConfiguration;
 public class GroupListActivity extends AppCompatActivity {
 
     TextView school;
+    TextView warning;
     ListView list;
     App app;
 
@@ -63,12 +66,16 @@ public class GroupListActivity extends AppCompatActivity {
                 .allowWritesOnUiThread(true)
                 .build();
         Realm backgroundThreadRealm = Realm.getInstance(config);
-        RealmResults<Group> fetchedGroup = backgroundThreadRealm.where(Group.class).findAll();
-        for (Group g: fetchedGroup) {
-            groups.add(g);
+        RealmResults<Group> fetchedGroup = backgroundThreadRealm.where(Group.class).equalTo("schoolName", getIntent().getStringExtra("school_name")).findAll();
+        if (fetchedGroup.size() > 0) {
+            for (Group g: fetchedGroup) {
+                groups.add(g);
+            }
+            GroupListAdapter adapter = new GroupListAdapter(this, groups);
+            list.setAdapter(adapter);
+            warning = findViewById(R.id.cannotFindGroup);
+            warning.setVisibility(View.GONE);
         }
-        GroupListAdapter adapter = new GroupListAdapter(this, groups);
-        list.setAdapter(adapter);
     }
 
     @Override

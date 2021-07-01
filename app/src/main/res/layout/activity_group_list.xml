@@ -28,4 +28,13 @@
         android:layout_marginTop="10dp"
         android:dividerHeight="2px" />
 
+    <TextView
+        android:id="@+id/cannotFindGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cannot find any group"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"/>
+
 </LinearLayout>

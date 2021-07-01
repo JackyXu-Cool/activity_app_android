@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import activity.app.android.util.AESCrypt;
 import activity.app.android.util.PathConverter;
@@ -92,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (it.isSuccess()) {
                 // Upload the image to firebase storage
                 StorageReference storageRef = storage.getReference();
-                StorageReference avatarRef = storageRef.child(app.currentUser().getId() + ".jpg");
+                StorageReference avatarRef = storageRef.child(UUID.randomUUID().toString() + ".jpg");
                 String path = PathConverter.convertMediaUriToPath(this, uri);
                 try {
                     InputStream stream = new FileInputStream(new File(path));
