@@ -37,6 +37,15 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
         spin.setOnItemSelectedListener(this);
+
+        String currSchool = app.currentUser().getCustomData().getString("school");
+        if (currSchool != "" && currSchool.length() > 0) {
+            for (int i = 0; i < schoolArray.length; i++) {
+                if (currSchool.equals(schoolArray[i])) {
+                    spin.setSelection(i);
+                }
+            }
+        }
     }
 
     @Override

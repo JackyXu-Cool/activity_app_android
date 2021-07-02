@@ -51,6 +51,7 @@ public class ApplyGroupActivity extends AppCompatActivity{
     SlidingUpPanelLayout panel;
     App app;
     MaterialButton applyBtn;
+    Realm backgroundThreadRealm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,14 @@ public class ApplyGroupActivity extends AppCompatActivity{
         slidingButtons = findViewById(R.id.slidingButtons);
         panel = findViewById(R.id.slidingpanel_group_whole);
         applyBtn = findViewById(R.id.apply);
+
+        // Realm Sync element
+        SyncConfiguration config = new SyncConfiguration.Builder(
+                app.currentUser(),
+                "clubM_data")
+                .allowWritesOnUiThread(true)
+                .build();
+        backgroundThreadRealm = Realm.getInstance(config);
 
         // Set up toolbars
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -224,12 +233,6 @@ public class ApplyGroupActivity extends AppCompatActivity{
 
     // Disable the apply button if the user is already in this group
     public void checkUserhasJoined() {
-        SyncConfiguration config = new SyncConfiguration.Builder(
-                app.currentUser(),
-                "clubM_data")
-                .allowWritesOnUiThread(true)
-                .build();
-        Realm backgroundThreadRealm = Realm.getInstance(config);
         Group group = backgroundThreadRealm.where(Group.class).equalTo("_id", getIntent().getStringExtra("group_id")).findFirst();
         if (group.getGroupMembers().contains(new ObjectId(app.currentUser().getId()))) {
             applyBtn.setEnabled(false);
@@ -258,12 +261,6 @@ public class ApplyGroupActivity extends AppCompatActivity{
             }
         });
         // update members list in group collection
-        SyncConfiguration config = new SyncConfiguration.Builder(
-                app.currentUser(),
-                "clubM_data")
-                .allowWritesOnUiThread(true)
-                .build();
-        Realm backgroundThreadRealm = Realm.getInstance(config);
         backgroundThreadRealm.executeTransaction(r -> {
             Group chosenGroup = r.where(Group.class).equalTo("_id", group_id).findFirst();
             chosenGroup.addMembers(new ObjectId(app.currentUser().getId()));
