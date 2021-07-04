@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateGroupActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="36sp"
+        android:fontFamily="@font/nexa_bold"
+        android:textColor="#fff"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Create New Group" />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/group_name_edittext"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:hint="Group Name"
+        android:textColorHint="#fff"
+        android:fontFamily="@font/nexa_light"
+        android:theme="@style/EditTextTheme"
+        android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Group_intro_edittext"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:hint="Group Introduction"
+        android:textColorHint="#fff"
+        android:fontFamily="@font/nexa_light"
+        android:theme="@style/EditTextTheme"
+        android:layout_gravity="center_horizontal"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <com.google.android.material.button.MaterialButton
+            app:strokeColor="#fff"
+            app:strokeWidth="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="backFromCreateGroupPage"
+            android:text="Back" />
+
+        <com.google.android.material.button.MaterialButton
+            app:strokeColor="#fff"
+            app:strokeWidth="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:layout_marginEnd="30dp"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Create" />
+
+    </RelativeLayout>
+
+</LinearLayout>

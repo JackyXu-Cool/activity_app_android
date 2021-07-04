@@ -12,16 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
-
-
-import activity.app.android.model.Group;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 import io.realm.mongodb.App;
-import io.realm.mongodb.sync.SyncConfiguration;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -30,6 +22,7 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView usernameDisplay;
     CircleImageView profileImage; // Set up toolbars
     ImageButton schoolListBtn;
+    ImageButton startBtn;
     TextView numberOfActivities;
     TextView numberOfGroups;
 
@@ -43,6 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
         schoolListBtn = findViewById(R.id.schoolListBtn);
         numberOfActivities = findViewById(R.id.number_of_activities_profile);
         numberOfGroups = findViewById(R.id.number_of_groups_profile);
+        startBtn = findViewById(R.id.startButton);
 
         app = ((MyApplication) this.getApplication()).app;
 
@@ -64,6 +58,12 @@ public class UserProfileActivity extends AppCompatActivity {
                         Log.e("ERROR", "Fail to fetch refresh data");
                     }
                 });
+            }
+        });
+        startBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfileActivity.this, CreateGroupActivity.class);
+                startActivity(intent);
             }
         });
     }
