@@ -19,6 +19,27 @@
         android:layout_gravity="center_horizontal"
         android:text="Create New Group" />
 
+    <ImageView
+        android:id="@+id/group_image_preview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/placeholder_image"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:background="#cfe3ff"
+        android:text="Select Image"
+        android:onClick="selectGroupImage"
+        android:layout_gravity="center_horizontal"
+        />
 
     <EditText
         android:layout_width="match_parent"
@@ -42,9 +63,9 @@
         android:layout_marginTop="25dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:inputType="text"
         android:textSize="20sp"
         android:hint="Group Introduction"
+        android:inputType="textMultiLine"
         android:textColorHint="#fff"
         android:fontFamily="@font/nexa_light"
         android:theme="@style/EditTextTheme"
@@ -53,7 +74,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="35dp">
 
         <com.google.android.material.button.MaterialButton
             app:strokeColor="#fff"
