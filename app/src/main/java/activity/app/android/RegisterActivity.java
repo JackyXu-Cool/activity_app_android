@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
             if (it.isSuccess()) {
                 // Upload the image to firebase storage
                 StorageReference storageRef = storage.getReference();
-                StorageReference avatarRef = storageRef.child(UUID.randomUUID().toString() + ".jpg");
+                StorageReference avatarRef = storageRef.child("users/" + UUID.randomUUID().toString() + ".jpg");
                 String path = PathConverter.convertMediaUriToPath(this, uri);
                 try {
                     InputStream stream = new FileInputStream(new File(path));

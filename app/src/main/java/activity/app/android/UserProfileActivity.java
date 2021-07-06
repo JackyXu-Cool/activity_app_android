@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -62,8 +63,13 @@ public class UserProfileActivity extends AppCompatActivity {
         });
         startBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this, CreateGroupActivity.class);
-                startActivity(intent);
+                String school = app.currentUser().getCustomData().getString("school");
+                if (school.equals("") || school.length() == 0) {
+                    Toast.makeText(UserProfileActivity.this, "You should select your school first", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(UserProfileActivity.this, CreateGroupActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

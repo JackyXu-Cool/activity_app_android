@@ -9,15 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import activity.app.android.model.Group;
 import activity.app.android.util.AESCrypt;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
-import io.realm.exceptions.RealmMigrationNeededException;
 import io.realm.mongodb.App;
 import io.realm.mongodb.Credentials;
-import io.realm.mongodb.sync.SyncConfiguration;
 
 public class WelcomActivity  extends AppCompatActivity {
 
