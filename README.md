@@ -14,5 +14,6 @@ Provide a platform for high school and college students to manage student organi
 ### Progress
 [10/20/2020](https://youtu.be/N_9_RSDaFBs) <br />
 [12/26/2020](https://www.youtube.com/watch?v=ZF-lh1_uuSY) <br />
-[6/13/2021](https://youtu.be/tGaJi4GRS_w)
+[6/13/2021](https://youtu.be/tGaJi4GRS_w)<br />
+[7/6/2021](https://youtu.be/ZrO0JWT0IqY)
 
